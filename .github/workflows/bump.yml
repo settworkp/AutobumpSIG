@@ -1,9 +1,7 @@
 name: Bump Thread Every 24 Hours
 
 on:
-  schedule:
-    - cron: '0 14 * * *'  # Tous les jours à 14h00 UTC = 15h00 Algérie (UTC+1)
-  workflow_dispatch:       # Lancement manuel possible
+  workflow_dispatch:       # Déclenché uniquement par cron-job.org ou manuellement
 
 jobs:
   autobump:
