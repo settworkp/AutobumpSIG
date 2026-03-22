@@ -1,0 +1,22 @@
+name: Bump Thread Every 24 Hours
+
+on:
+  schedule:
+    - cron: '0 14 * * *'  # Tous les jours à 14h00 UTC = 15h00 Algérie (UTC+1)
+  workflow_dispatch:       # Lancement manuel possible
+
+jobs:
+  autobump:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📁 Cloner le dépôt
+        uses: actions/checkout@v3
+
+      - name: 🟦 Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🚀 Lancer le script bump
+        run: node bump.js
