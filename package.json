@@ -1,0 +1,11 @@
+{
+  "name": "autobump",
+  "version": "2.0.0",
+  "description": "Script automatique de bump pour cracked.sh (sans Puppeteer)",
+  "main": "bump.js",
+  "scripts": {
+    "start": "node bump.js"
+  },
+  "author": "nord east",
+  "license": "MIT"
+}
