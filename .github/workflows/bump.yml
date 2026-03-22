@@ -19,4 +19,6 @@ jobs:
           node-version: 20
 
       - name: 🚀 Lancer le script bump
+        env:
+          COOKIES_JSON: ${{ secrets.COOKIES_JSON }}
         run: node bump.js
