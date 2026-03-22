@@ -5,17 +5,14 @@ const fs = require('fs');
 const THREAD_ID = '1901057';
 const BASE_URL  = 'cracked.sh';
 
-// Lire les cookies depuis le fichier JSON (format exporté par l'extension)
-const rawCookies = JSON.parse(fs.readFileSync('cookies.json', 'utf8'));
+// Lire les cookies depuis le Secret GitHub (env) ou fichier local
+const cookiesSource = process.env.COOKIES_JSON || fs.readFileSync('cookies.json', 'utf8');
+const rawCookies = JSON.parse(cookiesSource);
 
 // Convertir les cookies en string pour le header HTTP
 const cookieHeader = rawCookies
   .map(c => `${c.name}=${c.value}`)
   .join('; ');
-
-// Extraire le my_post_key depuis les cookies (mybbuser contient l'UID)
-// Le my_post_key est dynamique — on doit d'abord charger la page pour l'obtenir
-// ─────────────────────────────────────────────────────────────────────────────
 
 function httpGet(path) {
   return new Promise((resolve, reject) => {
@@ -58,10 +55,8 @@ async function getPostKey() {
     throw new Error(`Page non chargée — statut HTTP: ${res.status}`);
   }
 
-  // Chercher le my_post_key dans le HTML
   const match = res.body.match(/my_post_key=([a-f0-9]{32})/);
   if (!match) {
-    // Vérifier si connecté
     if (res.body.includes('You are not logged in')) {
       throw new Error('❌ Non connecté — cookies invalides ou expirés.');
     }
