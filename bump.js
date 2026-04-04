@@ -3,7 +3,7 @@ const fs = require('fs');
 
 // ─── Configuration ────────────────────────────────────────────────────────────
 const THREAD_ID = '1901057';
-const BASE_URL  = 'cracked.st';
+const BASE_URL  = 'cracked.ax';
 
 // Lire les cookies depuis le Secret GitHub (env) ou fichier local
 const cookiesSource = process.env.COOKIES_JSON || fs.readFileSync('cookies.json', 'utf8');
